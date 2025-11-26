@@ -17,5 +17,5 @@ create_gh_release() {
     log_info "Creating GitHub release for tag $tag"
     gh release create "$tag" \
         --title "$tag" \
-        --notes "$notes" \
+        --notes "$notes"
 }
