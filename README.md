@@ -1,22 +1,19 @@
-# Bash release kit for Git
+# Bash Release Kit
 
-This is a pure Bash release kit for Git repositories, designed to automate the process of creating releases. It includes a script that can be integrated into CI/CD pipelines, such as GitHub Actions.
+A zero-dependency, pure Bash release automation tool for Git repositories. It analyzes commit history based on commit messages, creates Git tags, GitHub releases, and can update version numbers in specified files.
 
-## Example workflow for GitHub Actions
-Create the `.github/` folder in your repository if it doesn't exist yet.
-```sh
-mkdir -p .github/workflows
-```
+Designed to be lightweight and fast, running natively on GitHub Actions without the need for Node.js, Python, or Docker containers.
 
-Add this repo as a submodule to your project in the path `.github/release-kit`:
-```sh
-git submodule add https://github.com/madmti/release-kit.git .github/release-kit
-```
+## Quick Start (GitHub Action)
 
-Then create a workflow file in `.github/workflows/release.yml` with the following content:
+The easiest way to use this tool is as a GitHub Action step.
+
+### Create the Workflow
+
+Create a file at `.github/workflows/release.yml`:
 
 ```yaml
-name: Bash Release
+name: Release
 
 on:
   push:
@@ -24,22 +21,23 @@ on:
       - main
 
 permissions:
-  contents: write # This permits creating releases
+  contents: write # Required to create tags and releases
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-          submodules: recursive
+          fetch-depth: 0 # Important: Required to calculate version history
 
-      - name: Exec Release Script
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is needed to create releases
-        run: ./.github/release-kit/release.sh
+      - name: Semantic Release
+        uses: madmti/release-kit@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Optional (Default: release-config.json)
+          # config_file: 'release-config.json' 
 ```
 
-This workflow will trigger on every push to the `main` branch, executing the `release.sh` script from the release kit submodule. Make sure to adjust the branch name if your main branch is named differently.
+That's it! On every push to the `main` branch, the action will analyze commit messages, create a new Git tag, and publish a GitHub release if applicable.
