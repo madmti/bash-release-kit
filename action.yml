@@ -9,6 +9,10 @@ inputs:
     required: false
     default: "release-config.json"
 
+branding:
+  icon: terminal
+  color: black
+
 runs:
   using: "composite"
   steps:

@@ -1,10 +1,20 @@
-# v1.0.1 (2025-11-27)
+# v1.1.1 (2025-11-27)
 
+### Bug Fixes
 
+- added action icon and color
 
-# v1.0.1 (2025-11-27)
+# v1.1.0 (2025-11-27)
 
+### Features
 
+- added github_token to GH_TOKEN too
+- github releases for git floating tags
+- floating tags functionality added
+
+### Bug Fixes
+
+- loop prevention from own commits
 
 # v1.0.1 (2025-11-27)
 
@@ -38,4 +48,3 @@
 - strip commit prefix in changelog
 - remove trailing backslash in gh release func
 - give release.sh +x rights
-
