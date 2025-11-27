@@ -33,7 +33,7 @@ jobs:
           fetch-depth: 0 # Important: Required to calculate version history
 
       - name: Semantic Release
-        uses: madmti/release-kit@v1
+        uses: madmti/bash-release-kit@main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           # Optional (Default: release-config.json)
