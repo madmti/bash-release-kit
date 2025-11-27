@@ -101,11 +101,22 @@ create_release_commit "$NEW_TAG"
 
 log_success "Release $NEW_TAG created successfully!"
 
+# Step 10: Update floating tags (if enabled)
+# Floating tags allow users to reference latest versions without specifying exact versions
+# e.g., 'uses: owner/repo@v1' or 'uses: owner/repo@latest' in GitHub Actions
+if check_update_latest; then
+    update_tag_latest
+fi
+
+if check_update_majors; then
+    update_tag_major "$NEW_TAG"
+fi
+
 # =========================================
 #               Platform Integration
 # =========================================
 
-# Step 10: Publish to external platforms (GitHub, etc.)
+# Step 11: Publish to external platforms (GitHub, etc.)
 if check_github_enable; then
     source "$SCRIPT_DIR/lib/platforms/github.sh"
 
