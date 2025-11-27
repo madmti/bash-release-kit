@@ -1,3 +1,9 @@
+# v1.1.1 (2025-11-27)
+
+### Bug Fixes
+
+- added action icon and color
+
 # v1.1.0 (2025-11-27)
 
 ### Features
