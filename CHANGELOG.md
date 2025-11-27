@@ -1,3 +1,15 @@
+# v1.1.0 (2025-11-27)
+
+### Features
+
+- added github_token to GH_TOKEN too
+- github releases for git floating tags
+- floating tags functionality added
+
+### Bug Fixes
+
+- loop prevention from own commits
+
 # v1.0.1 (2025-11-27)
 
 
