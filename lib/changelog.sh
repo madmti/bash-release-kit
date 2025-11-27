@@ -18,7 +18,10 @@ get_notes() {
     if [[ -n "$breaking" ]]; then
         echo "### ⚠ BREAKING CHANGES"
         echo ""
-        echo "$breaking" | sed -E 's/^[a-z]+(\(.*\))?!?:[[:space:]]*//' | sed 's/^/- /'
+        echo "$breaking" \
+            | sed -E 's/^BREAKING CHANGE:[[:space:]]*//' \
+            | sed -E 's/^[a-z]+(\(.*\))?!?:[[:space:]]*//' \
+            | sed 's/^/- /'
         echo ""
     fi
 
